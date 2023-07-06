@@ -1,0 +1,30 @@
+services:
+  gui-test:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: gui-test
+    init: true
+    restart: always
+    hostname: gui-test
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "10"
+    network_mode: "host"
+    tmpfs: /tmp
+    environment:
+      TZ: Asiz/Tokyo
+      DISPLAY: $DISPLAY
+      WAYLAND: $WAYLAND_DISPLAY
+      XDG_RUNTIME_DIR: $XDG_RUNTIME_DIR
+      PULSE_SERVER: $PULSE_SERVER
+      NVIDIA_VISIBLE_DEVICES: all
+      NVIDIA_DRIVER_CAPABILITIES: all
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities:
+                - gpu
