@@ -1,0 +1,18 @@
+services:
+  variable:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        HOGE: hoge
+        FUGA: ${FUGA_FROM_DOTENV}
+    env_file:
+      - env_file
+    container_name: variable
+    hostname: variable
+    environment:
+      COMPOSE: FROM_COMPOSE
+      HOST_ENV_LANG: ${LANG}
+      HOST_SHLVL: ${SHLVL}
+      DOTENV: ${DOTENV}
+      DEFAULT: ${DEFAULT_ENV:-default}

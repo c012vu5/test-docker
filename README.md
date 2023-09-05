@@ -1,8 +1,27 @@
-# gui-test-docker
+# test-docker
+[![License](https://img.shields.io/github/license/c012vu5/test-docker.svg?style=flat-square)](./LICENSE)
 
-Memorandum for doing something with container.
+コンテナであれこれするときの備忘録
 
 ## Variable
+
+### Dockerfile内(build段階)の変数利用
+- Dockerfile内の`ARG`で定義
+  - build段階でのみ使われるため, コンテナ内に残らない
+  - .envと組み合わせて.envで定義した変数をDockerfile内で利用することも可能
+- Dockerfile内の`ENV`で定義
+  - コンテナ内にも残る
+
+### compose.yml内(deploy段階)の変数利用
+- コンテキスト内の.envファイルで定義
+- ホスト側の環境変数を参照可能
+  - .envファイルで同名の変数が定義されている場合はそちらが優先
+
+### コンテナ内の変数利用
+- Dockerfile内の`ENV`で定義
+- compose.yml内の
+  - `environment`で定義
+  - `env_file`で環境変数を定義したファイルを指定
 
 ## GUI
 
