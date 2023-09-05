@@ -1,0 +1,28 @@
+services:
+  gui-test-docker:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        UID: ${UID}
+        GID: ${GID}
+    env_file: .env
+    container_name: gui-test-docker
+    init: true
+    restart: always
+    hostname: gui-test-docker
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "10"
+    tmpfs: /tmp
+    volumes:
+      - type: bind
+        source: /tmp/.X11-unix
+        target: /tmp/.X11-unix
+    environment:
+      TZ: Asiz/Tokyo
+      DISPLAY: $DISPLAY
+    entrypoint:
+    command: tail -f /dev/null
