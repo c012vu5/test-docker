@@ -1,16 +1,15 @@
 services:
-  gui-test-docker:
+  gui:
     build:
       context: .
       dockerfile: Dockerfile
       args:
         UID: ${UID}
         GID: ${GID}
-    env_file: .env
-    container_name: gui-test-docker
+    container_name: gui
     init: true
     restart: always
-    hostname: gui-test-docker
+    hostname: gui
     logging:
       driver: json-file
       options:
