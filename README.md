@@ -1,6 +1,6 @@
 # gui-test-docker
 
-コンテナであれこれしたいときの備忘録
+Memorandum for doing something with container.
 
 ## Variable
 
