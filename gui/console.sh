@@ -32,6 +32,7 @@ function prepare() {
     echo "### And set the specified volume location." >> .env
     echo "UID=`id -u`" >> .env
     echo "GID=`id -g`" >> .env
+    echo "USER=`whoami`" >> .env
     echo "VOL=" >> .env
 
     global_error
@@ -40,7 +41,7 @@ function prepare() {
 function container() {
     case ${ARG2} in
         "up" )
-            sudo ${COMPOSE} up --build -d
+            sudo ${COMPOSE} up -d
             ;;
         "down" )
             sudo ${COMPOSE} down
