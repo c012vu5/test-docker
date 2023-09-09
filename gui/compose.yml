@@ -1,0 +1,16 @@
+services:
+  gui:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: gui
+    hostname: gui
+    network_mode: "host"
+    volumes:
+      - type: bind
+        source: ${HOME}/.Xauthority
+        target: /root/.Xauthority
+        ro: true
+    environment:
+      DISPLAY: ${DISPLAY}
+    entrypoint: /usr/bin/xeyes
