@@ -8,7 +8,8 @@
 ### Dockerfile内(build段階)の変数利用
 - Dockerfile内の`ARG`で定義
   - build段階でのみ使われるため, コンテナ内に残らない
-  - .envと組み合わせて.envで定義した変数をDockerfile内で利用することも可能
+  - compose.yml内の`build` -> `args`で定義
+    - .envと組み合わせて.envで定義した変数をDockerfile内で利用することも可能
 - Dockerfile内の`ENV`で定義
   - コンテナ内にも残る
 
@@ -25,13 +26,20 @@
 
 ## GUI
 
-[DockerでGUIを表示するときの仕組みについて](https://qiita.com/Spritaro/items/f907a9b52cb78e4fbec0)  
-[Dockerコンテナ上でGUIアプリを表示する](https://zenn.dev/ysuito/articles/fdc4a49d83614a)  
-[Dockerの初歩と詰まったことへの備忘録](https://qiita.com/Yuya-Shimizu/items/f0ace02062cc13e9d54b)  
-[DockerコンテナをXクライアントにして, ホスト側のXサーバーで描画を行う](https://kazuhira-r.hatenablog.com/entry/2021/01/16/000533)  
-[DockerでXサーバーを動かしてGUIを直接表示する](https://blog.kunst1080.net/post/2018/03/18/225102/)  
+- コンテナをホストネットワークで起動する
+- 環境変数`${DISPLAY}`をホスト・コンテナ間で共有
+- Xサーバーへの認証情報`.Xauthority`をコンテナ内に共有
+  - コンテナ内実行ユーザーのホームディレクトリへ
+  - 所有者は関係なく動作した
+    - 読めればOK?
+
+以上3点を満たせば, コンテナ内でGUIアプリを動かせる.  
+
+docker composeを利用したかったが, `docker run ....`コマンドをcompose.ymlに落とし込めなかった  
+`Error: Can't open display: ${DISPLAY}`
 
 ## GPU
 
 [DockerでGPUを使おうとしたらError...](https://cocoinit23.com/docker-gpu-error-response-from-daemon-linux-runtime-spec-devices-could-not-select-device-driver-with-capabilities-gpu)  
 ~~[DockerからGUIを使ってみよう](https://www.idnet.co.jp/column/page_229.html)~~  
+[Dockerの初歩と詰まったことへの備忘録](https://qiita.com/Yuya-Shimizu/items/f0ace02062cc13e9d54b)  

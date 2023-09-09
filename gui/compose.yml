@@ -3,17 +3,14 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-      args:
-        UID: ${UID}
-        GID: ${GID}
-        USER: ${USER}
     container_name: gui
     hostname: gui
+    network_mode: "host"
     volumes:
       - type: bind
-        source: /tmp/.X11-unix
-        target: /tmp/.X11-unix
-        rw: true
+        source: ${HOME}/.Xauthority
+        target: /root/.Xauthority
+        ro: true
     environment:
       DISPLAY: ${DISPLAY}
-    entrypoint: tail -f /dev/null
+    entrypoint: /usr/bin/xeyes
