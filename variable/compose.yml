@@ -4,15 +4,18 @@ services:
       context: .
       dockerfile: Dockerfile
       args:
-        HOGE: hoge
-        FUGA: ${FUGA_FROM_DOTENV}
+        ARG_HOGE:
+        ARG_FUGA: from_compose
+        ARG_PIYO:
     env_file:
-      - env_file
+      - env_file1
+      - env_file2
     container_name: variable
     hostname: variable
     environment:
-      COMPOSE: FROM_COMPOSE
-      HOST_ENV_LANG: ${LANG}
-      HOST_SHLVL: ${SHLVL}
-      DOTENV: ${DOTENV}
-      DEFAULT: ${DEFAULT_ENV:-default}
+      ENV_BAR: from_compose
+      ENV_TOTO: from_compose
+      ENV_TITI: ${ENV_TITI}
+      ENV_HOST_LANG: ${LANG}
+      ENV_HOST_SHLVL: ${SHLVL}
+      ENV_DEFAULT: ${DEFAULT_ENV:-default}
