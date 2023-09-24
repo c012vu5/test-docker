@@ -4,11 +4,10 @@ services:
       context: .
       dockerfile: Dockerfile
     container_name: gui
-    hostname: gui
     network_mode: "host"
     volumes:
       - type: bind
-        source: ${HOME}/.Xauthority
+        source: ${CT_HOME}/.Xauthority
         target: /root/.Xauthority
         ro: true
     environment:
