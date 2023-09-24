@@ -4,7 +4,6 @@ services:
       context: .
       dockerfile: Dockerfile
     container_name: gui
-    hostname: gui
     network_mode: "host"
     volumes:
       - type: bind
