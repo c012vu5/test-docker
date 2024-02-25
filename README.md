@@ -47,3 +47,11 @@ docker composeを利用したかったが, `docker run ....`コマンドをcompo
 [DockerでGPUを使おうとしたらError...](https://cocoinit23.com/docker-gpu-error-response-from-daemon-linux-runtime-spec-devices-could-not-select-device-driver-with-capabilities-gpu)  
 ~~[DockerからGUIを使ってみよう](https://www.idnet.co.jp/column/page_229.html)~~  
 [Dockerの初歩と詰まったことへの備忘録](https://qiita.com/Yuya-Shimizu/items/f0ace02062cc13e9d54b)  
+
+## Tips
+### コンテナ内で実行した非PID1プロセスの出力をdocker (compose) logsに出力する方法
+`/proc/1/fd/1`にリダイレクトすることで実現できる
+```console
+$ echo hello > /proc/1/fd/1
+```
+引用 : [docker container内で叩いたコマンドを docker log に出力する方法](https://qiita.com/uturned0/items/2404aa8233cbf2b276f8)
