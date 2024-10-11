@@ -55,3 +55,19 @@ docker composeを利用したかったが, `docker run ....`コマンドをcompo
 $ echo hello > /proc/1/fd/1
 ```
 引用 : [docker container内で叩いたコマンドを docker log に出力する方法](https://qiita.com/uturned0/items/2404aa8233cbf2b276f8)
+
+### init=true (tini)を使いたくない使えない(rootless？), かつPID1プロセスがwhile: sleepなどSIGTERMで終了しない場合
+```sh
+main () {
+    trap 'exit 0' TERM
+    infinity
+}
+
+infinity () {
+    while :
+    do
+        sleep 30m &
+        wait $!
+    done
+}
+```
