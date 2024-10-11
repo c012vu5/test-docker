@@ -1,2 +1,5 @@
+# General ignored files
 *~
+
+# Private info contained files
 gui/.env
